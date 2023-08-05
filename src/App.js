@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useRef } from "react";
 
 import { Canvas } from "@react-three/fiber";
 import Box from "@mui/material/Box";
+import StepContext from "./@core/ context/stepContext";
 
 const Menu = React.lazy(() => import("./components/Menu/Menu"));
 const ThreeScene = React.lazy(() =>
@@ -9,13 +10,11 @@ const ThreeScene = React.lazy(() =>
 );
 
 const App = () => {
-  const [step, setStep] = useState(-1);
-  const RotateCamera = () => {
-    setStep((i) => (i = (i + 1) % 6));
-  };
-
+  const [menuStep, setStep] = useState(-1);
+  const canvasRef = useRef();
   return (
-    <div style={{ height: "100vh" }}>
+    <StepContext.Provider  value={{menuStep,setStep}}  >
+          <div style={{ height: "100vh" }}>
       <Box
         sx={{
           position: "absolute",
@@ -23,14 +22,29 @@ const App = () => {
           padding: 2,
           height: "98%",
         }}
-        onClick={() => RotateCamera()}
       >
         <Menu />
       </Box>
-      <Canvas flat linear camera={{ position: [0, 0, 2] }}>
-        <ThreeScene step={step} />
+      <Canvas
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          height: "100vh",
+          width: "100vw",
+        }}
+        camera={{
+          position: [0, -3, 40],
+          fov: (window.innerHeight * 65) / 935,
+          far: 1000,
+          near: 0.001,
+        }}
+        ref={canvasRef}
+      >
+        <ThreeScene/>
       </Canvas>
     </div>
+    </StepContext.Provider >
   );
 };
 

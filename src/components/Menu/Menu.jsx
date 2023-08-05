@@ -5,7 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 
 import Typography from "@mui/material/Typography";
-
+import StepContext from "../../@core/ context/stepContext";
 const steps = [
   {
     label: "welcome",
@@ -37,16 +37,17 @@ const steps = [
 ];
 
 const Menu = () => {
-  const [activeStep, setActiveStep] = React.useState(0);
-
+  const { menuStep, setStep } = React.useContext(StepContext);
   const handleNext = (val) => {
-    setActiveStep(val);
+    // setActiveStep(val);
+    console.log(val);
+    setStep(val)
   };
 
   return (
     <Box sx={{ maxWidth: 400, height: "100%" }}>
       <Stepper
-        activeStep={activeStep}
+        activeStep={menuStep}
         orientation="vertical"
         sx={{
           flexDirection: "column-reverse",

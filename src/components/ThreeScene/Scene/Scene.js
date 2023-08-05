@@ -1,7 +1,7 @@
 import { Billboard, Center, Text } from "@react-three/drei";
 import SkyBox from "./Skybox";
 
-export default function Scene(props) {
+export default function Scene() {
   return (
     <>
       <Center>
