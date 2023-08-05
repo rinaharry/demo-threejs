@@ -7,7 +7,7 @@ import {
 import Scene from "./Scene/Scene"
 import StepContext from "../../@core/ context/stepContext";
 function ThreeScene() {
-  const { menuStep, setState } = useContext(StepContext);
+  const { menuStep, setStep } = useContext(StepContext);
   const {camera} = useThree();
   useFrame((state) => {
     if (menuStep != -1) {
@@ -44,11 +44,25 @@ function ThreeScene() {
   const handleZoom = (zoomFactor) => {
     // camera.position.x *= camera.position.x;
     camera.position.y *= zoomFactor;
-    camera.position.z *= zoomFactor; 
-    console.log(Math.abs(camera.position.y-1.490549808299171e-15) ,Math.abs(camera.position.z-23.241897493151843))
+    camera.position.z *= zoomFactor;
+    handleStepByZoom(camera.position.y,camera.position.z);
     camera.updateProjectionMatrix();
   };
-
+  const handleStepByZoom =(y,z)=>{
+    //eto sis mila manipulena kel
+   if(y<1.790549808299171e-15 && y>1.490549808299171e-15){
+      setStep(1)
+    }else if(y<1.490549808299171e-15 && y>1.090549808299171e-15){
+      setStep(2)
+    }else if(y<1.090549808299171e-15 && y>0.890549808299171e-15){
+      setStep(3)
+    }else if(y<0.890549808299171e-15&& y>0.590549808299171e-15){
+      setStep(4)
+    }
+    else if(y<0.590549808299171e-15 && y>0.290549808299171e-15){
+      setStep(5)
+    }
+  }
   useEffect(() => {
     const handleMouseWheel = (event) => {
       const zoomFactor = event.deltaY > 0 ? 1.1 : 0.9;
