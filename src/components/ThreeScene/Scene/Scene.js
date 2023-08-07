@@ -12,61 +12,61 @@ export default function Scene() {
             color={"black"}
             letterSpacing={-0.05}
             font="/Inter-Bold.woff"
-            fontSize={3}
+            fontSize={1}
             fillOpacity={0.6}
-            position={[0,0, 0]}
+            position={[-5, 0, -20]}
           >
-            1
+            wimitim
           </Text>
           <Text
             color={"black"}
             letterSpacing={-0.05}
             font="/Inter-Bold.woff"
-            fontSize={3}
+            fontSize={1}
             fillOpacity={0.6}
-            position={[0,0, 6]}
+            position={[0, 0, 6]}
           >
-            2
+            Director word
           </Text>
           <Text
             color={"yellow"}
             letterSpacing={-0.05}
             font="/Inter-Bold.woff"
-            fontSize={3}
+            fontSize={1}
             fillOpacity={0.6}
-            position={[0,0, 12]}
+            position={[0, 0, 12]}
           >
-            3
+            New arrivals
           </Text>
           <Text
             color={"green"}
             letterSpacing={-0.05}
             font="/Inter-Bold.woff"
-            fontSize={3}
+            fontSize={1}
             fillOpacity={0.6}
-            position={[0,0, 18]}
+            position={[5, 0, 18]}
           >
-            4
+            Birthday
           </Text>
           <Text
             color={"red"}
             letterSpacing={-0.05}
             font="/Inter-Bold.woff"
-            fontSize={3}
+            fontSize={0.8}
             fillOpacity={0.6}
-            position={[0,0, 24]}
+            position={[-5, 1, 24]}
           >
-            FLARE
+            Your weather
           </Text>
           <Text
             color={"pink"}
             letterSpacing={-0.05}
             font="/Inter-Bold.woff"
-            fontSize={3}
+            fontSize={1}
             fillOpacity={0.6}
-            position={[0,0, 30]}
+            position={[0, 0, 40]}
           >
-            6
+            welcome
           </Text>
         </Billboard>
       </Center>
