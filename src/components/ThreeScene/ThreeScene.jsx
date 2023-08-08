@@ -12,11 +12,6 @@ import { Environment } from '@react-three/drei'
 function ThreeScene() {
   const { menuStep, setStep } = useContext(StepContext);
   const { camera } = useThree();
-  useFrame((state) => {
-    if (menuStep != -1) {
-      // state.camera.position.set(camera.position.x+step,camera.position.y+step,camera.position.z+step)
-    }
-  });
 
   console.log("menuStepmenuStep", menuStep);
 
@@ -102,7 +97,9 @@ function ThreeScene() {
         <Environment files={sky} background />
         <Suspense fallback={null}>
           {/* <Scene /> */}
-          <Model />
+          <mesh position={[0, -40, 0]} scale={60}>
+            <Model />
+          </mesh>
         </Suspense>
       </PerspectiveCamera>
     </>
