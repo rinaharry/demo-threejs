@@ -1,9 +1,13 @@
 import React, { useEffect, Suspense, useContext } from "react";
 import * as THREE from "three";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import Scene from "./Scene/Scene";
 import StepContext from "../../@core/ context/stepContext";
+import Model from "./model/moedel";
+import sky from "../../images/sky.hdr"
+import { useControls,folder } from "leva";
+import { Environment } from '@react-three/drei'
 
 function ThreeScene() {
   const { menuStep, setStep } = useContext(StepContext);
@@ -78,20 +82,29 @@ function ThreeScene() {
   }, []);
   return (
     <>
-      <pointLight position={[5, 5, 5]} intensity={2} />
-      <ambientLight intensity={1.4} />
-      <OrbitControls
-        rotateSpeed={Math.PI / 6}
-        minPolarAngle={0}
-        maxPolarAngle={Math.PI / 2}
-        enableRotate={false}
-        enableZoom={false}
-      />
-      {/* <Texts /> */}
-      {/* <Environment files={sky} background /> */}
-      <Suspense fallback={null}>
-        <Scene />
-      </Suspense>
+      <PerspectiveCamera
+        position={[0,-1,2.67]}
+        fov={(window.innerHeight * 65) / 935}
+        far={10000}
+        near={0.001}
+        rotation={[0, Math.PI/3, 0]}
+      >
+           <OrbitControls
+            maxPolarAngle={Math.PI/2}
+            minPolarAngle={Math.PI / 2}
+            enablePan={false} 
+            enableDamping={true}
+            target={[0,0,2.67]}
+          />
+          <ambientLight />
+          <pointLight position={[0, 0, 10]} intensity={0.4} />
+        {/* <Texts /> */}
+        <Environment files={sky} background />
+        <Suspense fallback={null}>
+          {/* <Scene /> */}
+          <Model />
+        </Suspense>
+      </PerspectiveCamera>
     </>
   );
 }
