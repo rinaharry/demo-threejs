@@ -63,18 +63,18 @@ function ThreeScene() {
       setStep(5);
     }
   };
-  useEffect(() => {
-    const handleMouseWheel = (event) => {
-      const zoomFactor = event.deltaY > 0 ? 1.1 : 0.9;
-      handleZoom(zoomFactor);
-    };
+  // useEffect(() => {
+  //   const handleMouseWheel = (event) => {
+  //     const zoomFactor = event.deltaY > 0 ? 1.1 : 0.9;
+  //     handleZoom(zoomFactor);
+  //   };
 
-    window.addEventListener("wheel", handleMouseWheel);
+  //   window.addEventListener("wheel", handleMouseWheel);
 
-    return () => {
-      window.removeEventListener("wheel", handleMouseWheel);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("wheel", handleMouseWheel);
+  //   };
+  // }, []);
   return (
     <>
       <PerspectiveCamera
