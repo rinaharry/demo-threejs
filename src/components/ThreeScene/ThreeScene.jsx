@@ -4,10 +4,12 @@ import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, PerspectiveCamera } from "@react-three/drei";
 import Scene from "./Scene/Scene";
 import StepContext from "../../@core/ context/stepContext";
-import Model from "./model/moedel";
+import Montagne from "./model/Montagne";
 import sky from "../../images/sky.hdr"
 import { useControls,folder } from "leva";
 import { Environment } from '@react-three/drei'
+import Map from "./model/Map";
+import { stepPos } from "../../@core/data/stepPos.data";
 
 function ThreeScene() {
   const { menuStep, setStep } = useContext(StepContext);
@@ -16,32 +18,12 @@ function ThreeScene() {
   console.log("menuStepmenuStep", menuStep);
 
   useEffect(() => {
-    if (menuStep != -1) {
-      switch (menuStep) {
-        case 0:
-          camera.position.set(0, -3, 46);
-          break;
-        case 1:
-          camera.position.set(0, 1.790549808299171e-15, 29.241897493151843);
-          break;
-        case 2:
-          camera.position.set(0, 1.490549808299171e-15, 23.241897493151843);
-          break;
-        case 3:
-          camera.position.set(0, 1.090549808299171e-15, 17.241897493151843);
-          break;
-        case 4:
-          camera.position.set(0, 0.890549808299171e-15, 11.241897493151843);
-          break;
-        case 5:
-          camera.position.set(0, 0.590549808299171e-15, 4.241897493151843);
-          break;
-        default:
-          break;
-      }
+    if (menuStep !== -1) {
+      const pos =stepPos[menuStep];
+      camera.position.set(pos.x,pos.y,pos.z)
       camera.updateProjectionMatrix();
     }
-  }, [menuStep]);
+  }, [menuStep,stepPos]);
   const handleZoom = (zoomFactor) => {
     // camera.position.x *= camera.position.x;
     camera.position.y *= zoomFactor;
@@ -63,18 +45,6 @@ function ThreeScene() {
       setStep(5);
     }
   };
-  // useEffect(() => {
-  //   const handleMouseWheel = (event) => {
-  //     const zoomFactor = event.deltaY > 0 ? 1.1 : 0.9;
-  //     handleZoom(zoomFactor);
-  //   };
-
-  //   window.addEventListener("wheel", handleMouseWheel);
-
-  //   return () => {
-  //     window.removeEventListener("wheel", handleMouseWheel);
-  //   };
-  // }, []);
   return (
     <>
       <PerspectiveCamera
@@ -96,10 +66,14 @@ function ThreeScene() {
         {/* <Texts /> */}
         <Environment files={sky} background />
         <Suspense fallback={null}>
-          {/* <Scene /> */}
-          <mesh position={[0, -40, 0]} scale={60}>
-            <Model />
-          </mesh>
+          {/* <mesh position={[0, -20, 0]} scale={60}>
+            <Montagne />
+          </mesh> */}
+          <Montagne/>
+          {/* <mesh position={[44.6509253754988, -9.764474307199073, -154.29638360447623]} scale={0.5}>
+            <Map />
+          </mesh> */}
+          <Map/>
         </Suspense>
       </PerspectiveCamera>
     </>

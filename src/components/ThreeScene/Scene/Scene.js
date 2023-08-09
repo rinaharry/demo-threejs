@@ -4,8 +4,8 @@ import SkyBox from "./Skybox";
 export default function Scene() {
   return (
     <>
+    
       <Center>
-        <SkyBox />
         <Billboard position={[0, -1.0, 0]}>
           <Text
             userData={{ lensflare: "no-occlusion" }} //Add this to make lens flare ignore occlusion
@@ -14,7 +14,7 @@ export default function Scene() {
             font="/Inter-Bold.woff"
             fontSize={1}
             fillOpacity={0.6}
-            position={[-5, 0, -20]}
+            position={[44.6509253754988,-9.764474307199073,-154.29638360447623]}
           >
             wimitim
           </Text>

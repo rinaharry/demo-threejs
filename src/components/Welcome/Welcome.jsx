@@ -10,6 +10,9 @@ const Welcome = () => {
         justifyContent={"center"}
         alignItems={"center"}
         spacing={1}
+        sx={{
+          background:"red"
+        }}
       >
         <Box fontSize={12} color={"white"}>
           Welcome Back

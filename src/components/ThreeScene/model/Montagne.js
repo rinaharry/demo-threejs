@@ -3,13 +3,14 @@ import { useLoader, useThree, useFrame } from "react-three-fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import TWEEN from '@tweenjs/tween.js'
 import * as THREE from "three"
-export default function Model() {
+import { Clone } from "@react-three/drei";
+export default function Montagne() {
   const model = useLoader(GLTFLoader, "./test.glb");
   const { camera } = useThree();
   const handleClick = (e) => {
     const val = e.point;
+    console.log(e.point);
     const cp = camera.position;
-    console.log(camera.quaternion);
     // setTo(val);
     const dx = Math.abs(camera.position.x - val.x);
     const dz = Math.abs(camera.position.z - val.z);
@@ -23,17 +24,19 @@ export default function Model() {
       camera.position.z = z
     })
     .onComplete(({x,y,z}) => {
-      console.log({x,y,z})
-      camera.lookAt(new THREE.Vector3(x,y,z))
+      camera.lookAt(new THREE.Vector3(0,0,0))
     })
-    .easing(TWEEN.Easing.Quartic.In)
-  .duration(1000)
+    .easing(TWEEN.Easing.Sinusoidal.In)
+    .duration(1000)
     .start();
   };
 
   useFrame((state, delta) => {
+  
     camera.updateProjectionMatrix();
     TWEEN.update()
   });
-  return <primitive object={model.scene} onClick={(e) => handleClick(e)}/>;
+  return <>
+      <Clone object={model.scene} onClick={(e) => handleClick(e)} scale={3} position={[-0.0566,-1.05,0]}  ></Clone>    
+  </>;
 }
